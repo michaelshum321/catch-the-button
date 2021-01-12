@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<script>
+            const init = function() {
+                // document.getElementById('hur').textContent = 'mega uwu';
+                let hur = document.getElementById('hur');
+                let hurX = Math.floor(Math.random() * window.innerWidth);
+                let hurY = Math.floor(Math.random() * window.innerHeight);
+                hur.style.left = hurX;
+                hur.style.top = hurY;
+
+                const isNearby = function(x, y, mouseX, mouseY) {
+                    // box ? 
+                    const absX = Math.floor(Math.abs(mouseX - x));
+                    const absY = Math.floor(Math.abs(mouseY - y));
+                    
+                    return absX < 100 && absY < 100;
+                }
+
+                const mouseMove = function(event) {
+                    // hur.style.left = `${event.clientX}px`;
+                    // hur.style.top = `${event.clientY}px`;
+                    if (isNearby(hurX, hurY, event.clientX, event.clientY)) {
+                        // TODO: window.innerWidth, window.innerHeight
+                        hurX += Math.floor(Math.random()*20) * (Math.round(Math.random()*2) -1);
+                        hurY += Math.floor(Math.random()*20) * (Math.round(Math.random()*2) -1);
+                    }
+
+                    hur.style.left = hurX;
+                    hur.style.top = hurY;
+                }
+
+                hur.onclick = () => alert("nice!");
+
+                document.onmousemove = mouseMove;
+            }
+
+            window.onload = init;
+        </script>
+        
+        <style>
+            @keyframes spin {
+                0% {
+                    transform: rotateY(0deg);
+                }
+                100% {
+                    transform: rotateY(360deg);
+                }
+            }
+
+            #hur {
+                animation-name: spin;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-duration: 5s;
+
+                transform-style: preserve-3d;
+                display: inline-block;
+                position: absolute;
+            }
+        </style>
+	</head>
+	<body>
+		<div id="hur">
+			UWU
+		<div>
+	</body>
+</html>
